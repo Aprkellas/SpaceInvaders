@@ -26,7 +26,22 @@ namespace SpaceInvaders
             InitializeComponent();
             InitializePlayer();
             InitializeEnemies();
+            GameLoop();
 
+        }
+
+        public void GameLoop()
+        {
+            // Move player 2's paddle based on keys
+            if (keysPressed.ContainsKey(Key.Up) && keysPressed[Key.Up])
+            {
+                playerInstance?.MovePlayer(1);
+            }
+            else if (keysPressed.ContainsKey(Key.Down) && keysPressed[Key.Down])
+            {
+                playerInstance?.MovePlayer(-1);
+
+            }
         }
 
         public void InitializePlayer()
@@ -63,10 +78,10 @@ namespace SpaceInvaders
             }
         }
 
-        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
-        {
-            playerInstance?.MovePlayer(e.Key);
-        }
+        //private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    playerInstance?.MovePlayer();
+        //}
 
         
         private Player? playerInstance;
@@ -76,6 +91,7 @@ namespace SpaceInvaders
         private const int enemyHeight = 30;
 
         private Enemy[,] enemies;
+        private Dictionary<Key, bool> keysPressed = new Dictionary<Key, bool>();
 
     }
 }

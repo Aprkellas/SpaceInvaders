@@ -21,17 +21,17 @@ namespace SpaceInvaders
             playerRectangle = rectangle;
         }
 
-        public void MovePlayer(Key key)
+        public void MovePlayer(int direction)
         {
             const int moveDistance = 10;
 
-            switch (key)
+            switch (direction)
             {
-                case Key.Left:
-                    Canvas.SetLeft(playerRectangle, Canvas.GetLeft(playerRectangle) - moveDistance); 
+                case -1:
+                    Canvas.SetLeft(playerRectangle, Canvas.GetLeft(playerRectangle) - moveDistance);
                     break;
 
-                case Key.Right:
+                case 1:
                     Canvas.SetRight(playerRectangle, Canvas.GetRight(playerRectangle) + moveDistance);
                     break;
             }
