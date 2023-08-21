@@ -20,9 +20,27 @@ namespace SpaceInvaders
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Player? playerInstance;
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeGame();
+
+        }
+
+        public void InitializeGame()
+        {
+            Rectangle? playerRectangle = gameGrid.FindName("Player") as Rectangle;
+            if (playerRectangle != null)
+            {
+                playerInstance = new Player(playerRectangle);
+            }
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            playerInstance?.MovePlayer(e.Key);
         }
     }
 }
