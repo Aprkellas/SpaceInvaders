@@ -35,8 +35,8 @@ namespace SpaceInvaders
                     Canvas.SetRight(playerRectangle, Canvas.GetRight(playerRectangle) + moveDistance);
                     break;
             }
-
         }
+
 
         private System.Windows.Shapes.Rectangle playerRectangle;
         public int xdirection = 0;
