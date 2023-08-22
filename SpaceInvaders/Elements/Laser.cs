@@ -11,17 +11,18 @@ namespace SpaceInvaders
 {
     class Laser
     {
-        public Laser(System.Windows.Shapes.Rectangle rectangle, int startingRow)
+        public Laser(System.Windows.Shapes.Rectangle rectangle, int startingRow, Grid grid)
         {
             laserRectangle = rectangle;
             row = startingRow;
+            gameGrid = grid;
             InitializeTimer();
         }
 
         private void InitializeTimer()
         {
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500); // Move every 0.5 seconds
+            timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -34,19 +35,19 @@ namespace SpaceInvaders
         public void MoveUp()
         {
             row--;
-            if (row < 0)
+            if ((row - 1) < 0)
             {
                 timer.Stop();
-                // Remove laser from the grid or perform other actions
             }
             else
             {
-                // Update the laser's position
-                Canvas.SetTop(laserRectangle, row * laserHeight);
+                Grid.SetRow(laserRectangle, (Grid.GetRow(laserRectangle) -1 ));
             }
         }
 
         private DispatcherTimer timer;
+        private Grid gameGrid;
+
         private int laserHeight = 10;
         private int row;
         private System.Windows.Shapes.Rectangle laserRectangle;

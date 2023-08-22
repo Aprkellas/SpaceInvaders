@@ -48,9 +48,9 @@ namespace SpaceInvaders
 
         public void InitializeEnemies()
         {
-            enemies = new Enemy[numRows, numCols];
+            enemies = new Enemy[2, numCols];
 
-            for (int row = 0; row < numRows; row++) 
+            for (int row = 0; row < 2; row++) 
             {
                 for (int col = 0; col < numCols; col++)
                 {
@@ -77,15 +77,15 @@ namespace SpaceInvaders
             {
                 Width = laserWidth,
                 Height = laserHeight,
-                Fill = Brushes.Blue // Set the laser color
+                Fill = Brushes.Blue 
             };
 
-            Grid.SetColumn(laserRectangle, Grid.GetColumn(playerInstance.playerRectangle)); // Set the initial column position
-            Grid.SetRow(laserRectangle, Grid.GetRow(playerInstance.playerRectangle) + 1 ); // Set the initial row position
+            Grid.SetColumn(laserRectangle, Grid.GetColumn(playerInstance.playerRectangle)); 
+            Grid.SetRow(laserRectangle, Grid.GetRow(playerInstance.playerRectangle) - 1 ); 
 
             gameGrid.Children.Add(laserRectangle);
 
-            laserInstance = new Laser(laserRectangle, numRows - 1); // Initialize the laser instance
+            laserInstance = new Laser(laserRectangle, numRows - 1, gameGrid);
         }
 
 
@@ -102,7 +102,7 @@ namespace SpaceInvaders
             else if (e.Key == Key.Up) 
             {
                 InitializeLaser();
-                laserInstance?.MoveUp();
+                //laserInstance?.MoveUp();
             }
         }
 
@@ -110,12 +110,13 @@ namespace SpaceInvaders
         private Enemy[,] enemies;
         private Laser? laserInstance;
 
-        private const int numRows = 2; 
+        private const int numRows = 10;
         private const int numCols = 14;
         private const int enemyWidth = 25; 
         private const int enemyHeight = 25;
         private const int laserWidth = 5;
         private const int laserHeight = 15;
+        
 
     }
 }
