@@ -23,19 +23,22 @@ namespace SpaceInvaders
 
         public void MovePlayer(int direction)
         {
-            const int moveDistance = 10;
-
+            int playerColumn = Grid.GetColumn(playerRectangle);
             switch (direction)
             {
+               
                 case -1:
-                    //Canvas.SetLeft(playerRectangle, Canvas.GetLeft(playerRectangle) - moveDistance);
-                    Grid.SetColumn(playerRectangle, (Grid.GetColumn(playerRectangle) - 1));
+                    if ((playerColumn - 1) >= 0)
+                    {
+                        Grid.SetColumn(playerRectangle, (playerColumn - 1));
+                    }
                     break;
 
                 case 1:
-                    //Canvas.SetRight(playerRectangle, Canvas.GetRight(playerRectangle) + moveDistance);
-                    Grid.SetColumn(playerRectangle, (Grid.GetColumn(playerRectangle) + 1));
-
+                    if ((playerColumn + 1) <= 12)
+                    {
+                        Grid.SetColumn(playerRectangle, (playerColumn + 1));
+                    }
                     break;
             }
         }
