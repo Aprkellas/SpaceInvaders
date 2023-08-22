@@ -38,6 +38,7 @@ namespace SpaceInvaders
             if ((row - 1) < 0)
             {
                 timer.Stop();
+                gameGrid.Children.Remove(laserRectangle);
             }
             else
             {
