@@ -28,11 +28,14 @@ namespace SpaceInvaders
             switch (direction)
             {
                 case -1:
-                    Canvas.SetLeft(playerRectangle, Canvas.GetLeft(playerRectangle) - moveDistance);
+                    //Canvas.SetLeft(playerRectangle, Canvas.GetLeft(playerRectangle) - moveDistance);
+                    Grid.SetColumn(playerRectangle, (Grid.GetColumn(playerRectangle) - 1));
                     break;
 
                 case 1:
-                    Canvas.SetRight(playerRectangle, Canvas.GetRight(playerRectangle) + moveDistance);
+                    //Canvas.SetRight(playerRectangle, Canvas.GetRight(playerRectangle) + moveDistance);
+                    Grid.SetColumn(playerRectangle, (Grid.GetColumn(playerRectangle) + 1));
+
                     break;
             }
         }

@@ -28,20 +28,12 @@ namespace SpaceInvaders
             InitializeEnemies();
             GameLoop();
 
+            KeyDown += MainWindow_KeyDown;
         }
 
         public void GameLoop()
         {
-            // Move player 2's paddle based on keys
-            if (keysPressed.ContainsKey(Key.Up) && keysPressed[Key.Up])
-            {
-                playerInstance?.MovePlayer(1);
-            }
-            else if (keysPressed.ContainsKey(Key.Down) && keysPressed[Key.Down])
-            {
-                playerInstance?.MovePlayer(-1);
 
-            }
         }
 
         public void InitializePlayer()
@@ -57,7 +49,7 @@ namespace SpaceInvaders
         {
             enemies = new Enemy[numRows, numCols];
 
-            for (int row = 0; row < 2; row++) 
+            for (int row = 0; row < numRows; row++) 
             {
                 for (int col = 0; col < numCols; col++)
                 {
@@ -78,17 +70,25 @@ namespace SpaceInvaders
             }
         }
 
-        //private void MainWindow_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    playerInstance?.MovePlayer();
-        //}
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Left)
+            {
+                playerInstance?.MovePlayer(-1);
+            }
+            else if (e.Key == Key.Right)
+            {
+                playerInstance?.MovePlayer(1);
+            }
+        }
 
-        
         private Player? playerInstance;
+   
         private const int numRows = 5; 
         private const int numCols = 10; 
         private const int enemyWidth = 40; 
         private const int enemyHeight = 30;
+        private int direction;
 
         private Enemy[,] enemies;
         private Dictionary<Key, bool> keysPressed = new Dictionary<Key, bool>();
