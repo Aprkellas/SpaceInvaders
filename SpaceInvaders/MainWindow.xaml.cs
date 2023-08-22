@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -70,6 +71,24 @@ namespace SpaceInvaders
             }
         }
 
+        public void InitializeLaser()
+        {
+            Rectangle laserRectangle = new Rectangle
+            {
+                Width = laserWidth,
+                Height = laserHeight,
+                Fill = Brushes.Blue // Set the laser color
+            };
+
+            Grid.SetColumn(laserRectangle, Grid.GetColumn(playerInstance.playerRectangle)); // Set the initial column position
+            Grid.SetRow(laserRectangle, Grid.GetRow(playerInstance.playerRectangle) + 1 ); // Set the initial row position
+
+            gameGrid.Children.Add(laserRectangle);
+
+            laserInstance = new Laser(laserRectangle, numRows - 1); // Initialize the laser instance
+        }
+
+
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Left)
@@ -80,18 +99,23 @@ namespace SpaceInvaders
             {
                 playerInstance?.MovePlayer(1);
             }
+            else if (e.Key == Key.Up) 
+            {
+                InitializeLaser();
+                laserInstance?.MoveUp();
+            }
         }
 
         private Player? playerInstance;
-   
-        private const int numRows = 5; 
-        private const int numCols = 10; 
-        private const int enemyWidth = 40; 
-        private const int enemyHeight = 30;
-        private int direction;
-
         private Enemy[,] enemies;
-        private Dictionary<Key, bool> keysPressed = new Dictionary<Key, bool>();
+        private Laser? laserInstance;
+
+        private const int numRows = 2; 
+        private const int numCols = 14;
+        private const int enemyWidth = 25; 
+        private const int enemyHeight = 25;
+        private const int laserWidth = 5;
+        private const int laserHeight = 15;
 
     }
 }

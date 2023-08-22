@@ -24,6 +24,7 @@ namespace SpaceInvaders
         public void MovePlayer(int direction)
         {
             int playerColumn = Grid.GetColumn(playerRectangle);
+
             switch (direction)
             {
                
@@ -44,9 +45,7 @@ namespace SpaceInvaders
         }
 
 
-        private System.Windows.Shapes.Rectangle playerRectangle;
-        public int xdirection = 0;
-
+        public System.Windows.Shapes.Rectangle playerRectangle;
     }
 
 }
