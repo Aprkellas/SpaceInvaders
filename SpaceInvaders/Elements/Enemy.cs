@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace SpaceInvaders
 {
@@ -15,24 +17,37 @@ namespace SpaceInvaders
             enemyRectangle = rectangle;
         }
 
+        private void InitializeTimer()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            EnemyMove();
+        }
         public void EnemyMove()
         {
-            double currentLeft = Canvas.GetLeft(enemyRectangle);
-            double newLeft = currentLeft + (moveDistance * moveDirection);
-
-            if (newLeft < 0 || newLeft + enemyRectangle.Width > 800) 
-            {
-                MoveDown();
-                moveDirection *= -1;
-            }
+                  
         }
         private void MoveDown()
         {
-            currentRow++;
-            double currentTop = Canvas.GetTop(enemyRectangle);
-            Canvas.SetTop(enemyRectangle, currentTop + rowHeight);
+            
+        }
+        private void MoveLeft()
+        {
+
+        }
+        private void MoveRight()
+        {
+
         }
 
+        private DispatcherTimer timer;
+        
         private const int moveDistance = 10;
         private const int rowHeight = 45;
 

@@ -102,7 +102,6 @@ namespace SpaceInvaders
             else if (e.Key == Key.Up) 
             {
                 InitializeLaser();
-                //laserInstance?.MoveUp();
             }
         }
 

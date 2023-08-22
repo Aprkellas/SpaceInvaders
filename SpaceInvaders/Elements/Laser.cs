@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
+ // <summary >
+ // Holds all logic for the laser 
+ // </summary>
+
+
 namespace SpaceInvaders
 {
     class Laser
