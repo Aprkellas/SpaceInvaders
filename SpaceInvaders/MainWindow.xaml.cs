@@ -49,6 +49,7 @@ namespace SpaceInvaders
         public void InitializeEnemies()
         {
             enemies = new Enemy[2, numCols];
+            enemyPositionMap = new Dictionary<Tuple<int, int>, Enemy>(); // Initialize the dictionary
 
             for (int row = 0; row < 2; row++) 
             {
@@ -66,7 +67,9 @@ namespace SpaceInvaders
 
                     gameGrid.Children.Add(enemyRect);
 
-                    enemies[row, col] = new Enemy(enemyRect, gameGrid);
+                    enemyPositionMap.Add(Tuple.Create(row, col), enemies[row, col]);
+                    enemies[row, col] = new Enemy(enemyRect, gameGrid, enemyPositionMap);
+
                 }
             }
         }
@@ -85,7 +88,7 @@ namespace SpaceInvaders
 
             gameGrid.Children.Add(laserRectangle);
 
-            laserInstance = new Laser(laserRectangle, numRows - 1, gameGrid, enemies);
+            laserInstance = new Laser(laserRectangle, numRows - 1, gameGrid, enemyPositionMap);
         }
 
 
@@ -108,6 +111,7 @@ namespace SpaceInvaders
         private Player? playerInstance;
         private Enemy[,] enemies;
         private Laser? laserInstance;
+        private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
 
         private const int numRows = 10;
         private const int numCols = 14;

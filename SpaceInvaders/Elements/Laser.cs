@@ -18,12 +18,12 @@ namespace SpaceInvaders
 {
     class Laser
     {
-        public Laser(System.Windows.Shapes.Rectangle rectangle, int startingRow, Grid grid, Enemy[,] enemyArray)
+        public Laser(System.Windows.Shapes.Rectangle rectangle, int startingRow, Grid grid, Dictionary<Tuple<int, int>, Enemy> positionMap)
         {
             laserRectangle = rectangle;
             row = startingRow;
             gameGrid = grid;
-            enemies = enemyArray;
+            enemyPositionMap = positionMap;
             InitializeTimer();
         }
 
@@ -57,26 +57,22 @@ namespace SpaceInvaders
 
         public void DetectCollision()
         {
-            int column = Grid.GetColumn(laserRectangle);
+            int laserColumn = Grid.GetColumn(laserRectangle);
+            int laserRow = Grid.GetRow(laserRectangle);
+            Tuple<int, int> laserPosition = Tuple.Create(laserRow, laserColumn);
 
-            // Calculate the laser's current position
-            Point laserPosition = new Point(row, column);
-
-            // Check if there's an enemy at the laser's position
-            try { 
-            if (enemies[row, column] != null)
+            if (enemyPositionMap.ContainsKey(laserPosition))
             {
-                Enemy enemy = enemies[row, column];
-                enemy.GetHit(); // Call the GetHit() method on the enemy
-                gameGrid.Children.Remove(laserRectangle); // Remove the laser
-                timer.Stop(); // Stop the laser's timer
-                }
-            } catch (Exception ex) { Console.WriteLine(ex); }
+                Enemy hitEnemy = enemyPositionMap[laserPosition];
+                hitEnemy.GetHit();
+                gameGrid.Children.Remove(laserRectangle);
+            }
         }
 
         private DispatcherTimer timer;
         private Grid gameGrid;
-        private Enemy[,] enemies;
+        private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
+
 
         private int laserHeight = 10;
         private int row;

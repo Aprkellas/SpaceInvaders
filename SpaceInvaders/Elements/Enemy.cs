@@ -17,9 +17,11 @@ namespace SpaceInvaders
 {
     class Enemy
     {
-        public Enemy(System.Windows.Shapes.Rectangle rectangle, Grid grid)
+        public Enemy(System.Windows.Shapes.Rectangle rectangle, Grid grid, Dictionary<Tuple<int, int>, Enemy> positionMap)
+
         { 
             enemyRectangle = rectangle;
+            enemyPositionMap = positionMap;
             gameGrid = grid;
             InitializeTimer();
         }
@@ -39,38 +41,52 @@ namespace SpaceInvaders
         // enemy movement logic
         public void EnemyMove()
         {
-            int enemyColumn = Grid.GetColumn(enemyRectangle);
-            int enemyRow = Grid.GetRow(enemyRectangle);
+            
+            enemyColumn = Grid.GetColumn(enemyRectangle);
+            enemyRow = Grid.GetRow(enemyRectangle);
 
             int enemyNextColumn = enemyColumn + 1;
             int enemyNextRow = enemyRow + 1;
 
             int enemyNextColumnLeft = enemyColumn - 1;
 
-            if (!movingLeft) { 
-                if (enemyNextColumn !< 12)
+            if (!movingLeft)
+            {
+                if (enemyNextColumn! < 12)
                 {
                     Grid.SetColumn(enemyRectangle, enemyNextColumn);
-                } 
+
+                }
                 else if (enemyNextColumn >= 12)
                 {
                     Grid.SetRow(enemyRectangle, enemyNextRow);
                     movingLeft = true;
+
                 }
-            } else
+
+            }
+            else
             {
                 if (enemyNextColumnLeft >= 0)
                 {
                     Grid.SetColumn(enemyRectangle, enemyNextColumnLeft);
+
                 }
                 else if (enemyColumn == 0)
                 {
                     Grid.SetRow(enemyRectangle, enemyNextRow);
                     movingLeft = false;
+
                 }
             }
-            
+            UpdatePositionInMap(enemyRow, enemyColumn);
         }
+        private void UpdatePositionInMap(int newRow, int newCol)
+        {
+            enemyPositionMap.Remove(Tuple.Create(enemyRow, enemyColumn)); // Remove old entry
+            enemyPositionMap.Add(Tuple.Create(newRow, newCol), this);    // Add new entry
+        }
+
         // logic for enemy getting hit by a laser
         public void GetHit()
         {
@@ -84,11 +100,15 @@ namespace SpaceInvaders
             }
         }
 
+        private Enemy[,] enemies;
         private Grid gameGrid;
         private DispatcherTimer timer;
+        private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
         public System.Windows.Shapes.Rectangle enemyRectangle;
 
         private bool movingLeft = false;
         private int enemyHealth = 10;
+        public int enemyRow;
+        public int enemyColumn;
     }
 }
