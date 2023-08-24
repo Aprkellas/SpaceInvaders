@@ -49,7 +49,7 @@ namespace SpaceInvaders
         public void InitializeEnemies()
         {
             enemies = new Enemy[2, numCols];
-            enemyPositionMap = new Dictionary<Tuple<int, int>, Enemy>(); // Initialize the dictionary
+            enemyPositionMap = new Dictionary<Tuple<int, int>, Enemy>(); 
 
             for (int row = 0; row < 2; row++) 
             {

@@ -86,8 +86,8 @@ namespace SpaceInvaders
         }
         private void UpdatePositionInMap(int newRow, int newCol)
         {
-            enemyPositionMap.Remove(Tuple.Create(enemyRow, enemyColumn)); // Remove old entry
-            enemyPositionMap.Add(Tuple.Create(newRow, newCol), this);    // Add new entry
+            enemyPositionMap.Remove(Tuple.Create(enemyRow, enemyColumn)); 
+            enemyPositionMap.Add(Tuple.Create(newRow, newCol), this);    
         }
 
         // logic for enemy getting hit by a laser
@@ -101,7 +101,7 @@ namespace SpaceInvaders
             { 
                 enemyHealth -= 2;
 
-                colorOffset = colorOffset -10; // Adjust this value for the desired color shift
+                colorOffset = colorOffset -10; 
                 Color oldColor = ((SolidColorBrush)enemyRectangle.Fill).Color;
 
                 byte newR = (byte)Math.Max(0, oldColor.R + colorOffset);
