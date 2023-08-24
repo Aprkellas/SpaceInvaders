@@ -7,14 +7,20 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
+/// <summary>
+/// Holds enemy class with methods for all enemies 
+/// abilities
+/// </summary>
+
+
 namespace SpaceInvaders
 {
     class Enemy
     {
-
-        public Enemy(System.Windows.Shapes.Rectangle rectangle) 
+        public Enemy(System.Windows.Shapes.Rectangle rectangle, Grid grid)
         { 
             enemyRectangle = rectangle;
+            gameGrid = grid;
             InitializeTimer();
         }
 
@@ -30,6 +36,7 @@ namespace SpaceInvaders
         {
             EnemyMove();
         }
+        // enemy movement logic
         public void EnemyMove()
         {
             int enemyColumn = Grid.GetColumn(enemyRectangle);
@@ -63,16 +70,24 @@ namespace SpaceInvaders
                 }
             }
         }
+        // logic for enemy getting hit by a laser
+        private void GetHit()
+        {
+            if (enemyHealth <= 0)
+            {
+                gameGrid.Children.Remove(enemyRectangle);
+            }
+            else 
+            { 
+                enemyHealth -= 2;
+            }
+        }
 
+        private Grid gameGrid;
         private DispatcherTimer timer;
-        
-        private const int moveDistance = 10;
-        private const int rowHeight = 45;
-
         private System.Windows.Shapes.Rectangle enemyRectangle;
-        private int currentRow = 0;
-        private int moveDirection = 1;
 
         private bool movingLeft = false;
+        private int enemyHealth = 10;
     }
 }

@@ -66,7 +66,7 @@ namespace SpaceInvaders
 
                     gameGrid.Children.Add(enemyRect);
 
-                    enemies[row, col] = new Enemy(enemyRect);
+                    enemies[row, col] = new Enemy(enemyRect, gameGrid);
                 }
             }
         }
