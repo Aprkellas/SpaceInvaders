@@ -85,7 +85,7 @@ namespace SpaceInvaders
 
             gameGrid.Children.Add(laserRectangle);
 
-            laserInstance = new Laser(laserRectangle, numRows - 1, gameGrid);
+            laserInstance = new Laser(laserRectangle, numRows - 1, gameGrid, enemies);
         }
 
 
@@ -115,6 +115,7 @@ namespace SpaceInvaders
         private const int enemyHeight = 25;
         private const int laserWidth = 5;
         private const int laserHeight = 15;
+
         
 
     }

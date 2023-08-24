@@ -69,9 +69,10 @@ namespace SpaceInvaders
                     movingLeft = false;
                 }
             }
+            
         }
         // logic for enemy getting hit by a laser
-        private void GetHit()
+        public void GetHit()
         {
             if (enemyHealth <= 0)
             {
@@ -85,7 +86,7 @@ namespace SpaceInvaders
 
         private Grid gameGrid;
         private DispatcherTimer timer;
-        private System.Windows.Shapes.Rectangle enemyRectangle;
+        public System.Windows.Shapes.Rectangle enemyRectangle;
 
         private bool movingLeft = false;
         private int enemyHealth = 10;
