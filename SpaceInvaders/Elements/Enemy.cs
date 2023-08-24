@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Xml.Serialization;
 
 /// <summary>
 /// Holds enemy class with methods for all enemies 
@@ -97,7 +100,22 @@ namespace SpaceInvaders
             else 
             { 
                 enemyHealth -= 2;
+
+                colorOffset = colorOffset -10; // Adjust this value for the desired color shift
+                Color oldColor = ((SolidColorBrush)enemyRectangle.Fill).Color;
+
+                byte newR = (byte)Math.Max(0, oldColor.R + colorOffset);
+                byte newG = (byte)Math.Max(0, oldColor.G + colorOffset);
+                byte newB = (byte)Math.Max(0, oldColor.B + colorOffset);
+
+                Color newColor = Color.FromRgb(newR, newG, newB);
+                enemyRectangle.Fill = new SolidColorBrush(newColor);
             }
+        }
+
+        private void Fire()
+        {
+
         }
 
         private Enemy[,] enemies;
@@ -106,6 +124,7 @@ namespace SpaceInvaders
         private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
         public System.Windows.Shapes.Rectangle enemyRectangle;
 
+        private int colorOffset = 0;
         private bool movingLeft = false;
         private int enemyHealth = 10;
         public int enemyRow;

@@ -74,9 +74,7 @@ namespace SpaceInvaders
         private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
 
 
-        private int laserHeight = 10;
         private int row;
-        private int column;
         private System.Windows.Shapes.Rectangle laserRectangle;
     }
 }
