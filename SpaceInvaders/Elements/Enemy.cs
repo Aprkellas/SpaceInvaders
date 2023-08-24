@@ -15,6 +15,7 @@ namespace SpaceInvaders
         public Enemy(System.Windows.Shapes.Rectangle rectangle) 
         { 
             enemyRectangle = rectangle;
+            InitializeTimer();
         }
 
         private void InitializeTimer()
@@ -31,19 +32,36 @@ namespace SpaceInvaders
         }
         public void EnemyMove()
         {
-                  
-        }
-        private void MoveDown()
-        {
-            
-        }
-        private void MoveLeft()
-        {
+            int enemyColumn = Grid.GetColumn(enemyRectangle);
+            int enemyRow = Grid.GetRow(enemyRectangle);
 
-        }
-        private void MoveRight()
-        {
+            int enemyNextColumn = enemyColumn + 1;
+            int enemyNextRow = enemyRow + 1;
 
+            int enemyNextColumnLeft = enemyColumn - 1;
+
+            if (!movingLeft) { 
+                if (enemyNextColumn !< 12)
+                {
+                    Grid.SetColumn(enemyRectangle, enemyNextColumn);
+                } 
+                else if (enemyNextColumn >= 12)
+                {
+                    Grid.SetRow(enemyRectangle, enemyNextRow);
+                    movingLeft = true;
+                }
+            } else
+            {
+                if (enemyNextColumnLeft >= 0)
+                {
+                    Grid.SetColumn(enemyRectangle, enemyNextColumnLeft);
+                }
+                else if (enemyColumn == 0)
+                {
+                    Grid.SetRow(enemyRectangle, enemyNextRow);
+                    movingLeft = false;
+                }
+            }
         }
 
         private DispatcherTimer timer;
@@ -54,5 +72,7 @@ namespace SpaceInvaders
         private System.Windows.Shapes.Rectangle enemyRectangle;
         private int currentRow = 0;
         private int moveDirection = 1;
+
+        private bool movingLeft = false;
     }
 }
