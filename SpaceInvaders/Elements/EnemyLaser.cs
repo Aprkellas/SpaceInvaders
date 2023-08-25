@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 
 /// <summary>
-/// Holds enemy laser abilities 
+/// Holds enemy laser abilities/ 
 /// </summary>
 
 namespace SpaceInvaders.Elements

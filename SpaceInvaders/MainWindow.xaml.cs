@@ -39,10 +39,12 @@ namespace SpaceInvaders
 
         public void InitializePlayer()
         {
+
             Rectangle? playerRectangle = gameGrid.FindName("Player") as Rectangle;
+            playerPositionMap = new Dictionary<int, int>();
             if (playerRectangle != null)
             {
-                playerInstance = new Player(playerRectangle);
+                playerInstance = new Player(playerRectangle, playerPositionMap);
             }
         }
 
@@ -112,6 +114,8 @@ namespace SpaceInvaders
         private Enemy[,] enemies;
         private Laser? laserInstance;
         private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
+        private Dictionary<int, int> playerPositionMap;
+        
 
         private const int numRows = 10;
         private const int numCols = 14;

@@ -18,7 +18,11 @@ namespace SpaceInvaders
 {
     class Laser
     {
-        public Laser(System.Windows.Shapes.Rectangle rectangle, int startingRow, Grid grid, Dictionary<Tuple<int, int>, Enemy> positionMap)
+        public Laser(System.Windows.Shapes.Rectangle rectangle, 
+            int startingRow, 
+            Grid grid, 
+            Dictionary<Tuple<int, int>, 
+                Enemy> positionMap)
         {
             laserRectangle = rectangle;
             row = startingRow;
