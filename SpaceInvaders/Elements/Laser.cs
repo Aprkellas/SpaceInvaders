@@ -73,6 +73,7 @@ namespace SpaceInvaders
             }
         }
 
+
         private DispatcherTimer timer;
         private Grid gameGrid;
         private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;

@@ -17,7 +17,7 @@ namespace SpaceInvaders
     {
 
         public Player(System.Windows.Shapes.Rectangle rectangle,
-            Dictionary<int, int> positionMap)
+            Dictionary<Tuple<int, int>, bool> positionMap)
         {
             playerRectangle = rectangle;
             playerPositionMap = positionMap;
@@ -49,13 +49,13 @@ namespace SpaceInvaders
         }
         private void UpdatePosition(int newCol)
         {
-            playerPositionMap.Remove(playerColumn);
-            playerPositionMap.Add(9, newCol);
+            playerPositionMap.Remove(Tuple.Create(9, playerColumn));
+            playerPositionMap.Add(Tuple.Create(9, newCol), true);
         }
 
 
         public System.Windows.Shapes.Rectangle playerRectangle;
-        private Dictionary<int,int> playerPositionMap;
+        private Dictionary<Tuple<int, int>, bool> playerPositionMap;
 
         public int playerHealth = 10;
         public int playerColumn;
