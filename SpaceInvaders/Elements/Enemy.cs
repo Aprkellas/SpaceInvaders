@@ -57,6 +57,11 @@ namespace SpaceInvaders
 
             int enemyNextColumnLeft = enemyColumn - 1;
 
+            if (enemyNextRow == 10)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
+
             if (!movingLeft)
             {
                 if (enemyNextColumn! < 12)
@@ -68,7 +73,6 @@ namespace SpaceInvaders
                 {
                     Grid.SetRow(enemyRectangle, enemyNextRow);
                     movingLeft = true;
-
                 }
 
             }
@@ -85,7 +89,7 @@ namespace SpaceInvaders
                     movingLeft = false;
 
                 }
-            }
+            } 
             Fire();
             UpdatePositionInMap(enemyRow, enemyColumn);
         }
