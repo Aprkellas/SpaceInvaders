@@ -23,52 +23,55 @@ namespace SpaceInvaders.Elements
             InitializeTimer();
         }
 
-    private void InitializeTimer()
-    {
-        timer = new DispatcherTimer();
-        timer.Interval = TimeSpan.FromMilliseconds(500);
-        timer.Tick += Timer_Tick;
-        timer.Start();
-    }
+        private void InitializeTimer()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
 
-    private void Timer_Tick(object sender, EventArgs e)
-    {
+        private void Timer_Tick(object sender, EventArgs e)
+        {
             MoveDown();
-    }
-
-    public void MoveDown()
-    {
-        row++;
-        if ((row + 1) < 9)
-        {
-            timer.Stop();
-            gameGrid.Children.Remove(enemyLaserRectangle);
         }
-        else
+
+        public void MoveDown()
         {
-            Grid.SetRow(enemyLaserRectangle, (Grid.GetRow(enemyLaserRectangle) - 1));
-            DetectCollision();
+            row++;
+            if ((row + 1) < 9)
+            {
+                timer.Stop();
+                gameGrid.Children.Remove(enemyLaserRectangle);
+            }
+            else
+            {
+                Grid.SetRow(enemyLaserRectangle, (Grid.GetRow(enemyLaserRectangle) - 1));
+                DetectCollision();
+            }
         }
-    }
 
-    public void DetectCollision()
-    {
-        int LaserColumn = Grid.GetColumn(enemyLaserRectangle);
-        int laserRow = Grid.GetRow(enemyLaserRectangle);
-        Tuple<int, int> laserPosition = Tuple.Create(laserRow, LaserColumn);
-
-        if (playerPositionMap.ContainsKey(laserPosition))
+        public void DetectCollision()
         {
-        }
-    }
+            int LaserColumn = Grid.GetColumn(enemyLaserRectangle);
+            int laserRow = Grid.GetRow(enemyLaserRectangle);
+            Tuple<int, int> laserPosition = Tuple.Create(laserRow, LaserColumn);
 
-    private DispatcherTimer timer;
-    private Grid gameGrid;
-    private Dictionary<Tuple<int, int>, bool> playerPositionMap;
+            if (playerPositionMap.ContainsKey(laserPosition))
+            {
+            }
+        }
+
+        private DispatcherTimer timer;
+        private Grid gameGrid;
+        private Dictionary<Tuple<int, int>, bool> playerPositionMap;
 
 
 
         private int row;
-    private System.Windows.Shapes.Rectangle enemyLaserRectangle;
+
+
+        private System.Windows.Shapes.Rectangle enemyLaserRectangle;
+    }
 }
-}
+

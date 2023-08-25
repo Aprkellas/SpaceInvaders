@@ -123,8 +123,8 @@ namespace SpaceInvaders
         private const int numCols = 14;
         private const int enemyWidth = 25; 
         private const int enemyHeight = 25;
-        private const int laserWidth = 5;
-        private const int laserHeight = 15;
+        public const int laserWidth = 5;
+        public const int laserHeight = 15;
 
         
 

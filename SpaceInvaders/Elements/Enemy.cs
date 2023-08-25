@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SpaceInvaders.Elements;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -101,21 +103,38 @@ namespace SpaceInvaders
             { 
                 enemyHealth -= 2;
 
-                colorOffset = colorOffset -10; 
-                Color oldColor = ((SolidColorBrush)enemyRectangle.Fill).Color;
+                colorOffset = colorOffset -10;
+                System.Windows.Media.Color oldColor = ((SolidColorBrush)enemyRectangle.Fill).Color;
 
                 byte newR = (byte)Math.Max(0, oldColor.R + colorOffset);
                 byte newG = (byte)Math.Max(0, oldColor.G + colorOffset);
                 byte newB = (byte)Math.Max(0, oldColor.B + colorOffset);
 
-                Color newColor = Color.FromRgb(newR, newG, newB);
+                System.Windows.Media.Color newColor = System.Windows.Media.Color.FromRgb(newR, newG, newB);
                 enemyRectangle.Fill = new SolidColorBrush(newColor);
             }
         }
 
         private void Fire()
         {
+            
+            if (random.NextDouble() < fireProbability)
+            {
+                InitilizeEnemyLaser();
+            }
+        }
 
+        private void InitilizeEnemyLaser()
+        {
+            System.Windows.Shapes.Rectangle enemyLaserRectangle = new System.Windows.Shapes.Rectangle
+            {
+                Width = 5,
+                Height = 15,
+                Fill = Brushes.Green
+            };
+
+            Grid.SetColumn(enemyLaserRectangle, Grid.GetColumn(enemyRectangle));
+            Grid.SetRow(enemyLaserRectangle, Grid.GetRow(enemyRectangle));
         }
 
         private Enemy[,] enemies;
@@ -129,5 +148,7 @@ namespace SpaceInvaders
         private int enemyHealth = 10;
         public int enemyRow;
         public int enemyColumn;
+        private Random random = new Random();
+        private double fireProbability = 0.2;
     }
 }
