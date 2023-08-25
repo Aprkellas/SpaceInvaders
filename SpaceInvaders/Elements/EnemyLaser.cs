@@ -39,7 +39,7 @@ namespace SpaceInvaders.Elements
         public void MoveDown()
         {
             row++;
-            if ((row + 1) > 9)
+            if (row > 9)
             {
                 timer.Stop();
                 gameGrid.Children.Remove(enemyLaserRectangle);

@@ -34,7 +34,7 @@ namespace SpaceInvaders
                     if ((playerColumn - 1) >= 0)
                     {
                         Grid.SetColumn(playerRectangle, (playerColumn - 1));
-                        UpdatePosition(playerColumn - 1);
+                        playerNextColumn = playerColumn - 1;
                     }
                     break;
 
@@ -42,10 +42,12 @@ namespace SpaceInvaders
                     if ((playerColumn + 1) <= 12)
                     {
                         Grid.SetColumn(playerRectangle, (playerColumn + 1));
-                        UpdatePosition(playerColumn + 1);
+                        playerNextColumn = playerColumn + 1;
+
                     }
                     break;
             }
+            UpdatePosition(playerNextColumn);
         }
         private void UpdatePosition(int newCol)
         {
@@ -71,6 +73,8 @@ namespace SpaceInvaders
 
         public int playerHealth = 10;
         public int playerColumn;
+        public int playerNextColumn;
+
 
 
     }
