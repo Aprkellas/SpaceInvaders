@@ -22,11 +22,13 @@ namespace SpaceInvaders
 {
     class Enemy
     {
-        public Enemy(System.Windows.Shapes.Rectangle rectangle, Grid grid, Dictionary<Tuple<int, int>, Enemy> positionMap)
+        public Enemy(System.Windows.Shapes.Rectangle rectangle, Grid grid, Dictionary<Tuple<int, int>, Enemy> positionMap,
+            Dictionary<Tuple<int, int>, Player> playerMap)
 
         { 
             enemyRectangle = rectangle;
             enemyPositionMap = positionMap;
+            playerPositionMap = playerMap;
             gameGrid = grid;
             InitializeTimer();
         }
@@ -84,6 +86,7 @@ namespace SpaceInvaders
 
                 }
             }
+            Fire();
             UpdatePositionInMap(enemyRow, enemyColumn);
         }
         private void UpdatePositionInMap(int newRow, int newCol)
@@ -135,12 +138,19 @@ namespace SpaceInvaders
 
             Grid.SetColumn(enemyLaserRectangle, Grid.GetColumn(enemyRectangle));
             Grid.SetRow(enemyLaserRectangle, Grid.GetRow(enemyRectangle));
+
+            gameGrid.Children.Add(enemyLaserRectangle);
+
+            enemyLaserInstance = new EnemyLaser(enemyLaserRectangle, enemyRow, gameGrid, playerPositionMap);
         }
 
         private Enemy[,] enemies;
         private Grid gameGrid;
         private DispatcherTimer timer;
         private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
+        private Dictionary<Tuple<int, int>, Player> playerPositionMap;
+        private EnemyLaser? enemyLaserInstance;
+
         public System.Windows.Shapes.Rectangle enemyRectangle;
 
         private int colorOffset = 0;

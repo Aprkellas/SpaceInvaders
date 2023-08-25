@@ -27,21 +27,15 @@ namespace SpaceInvaders
             InitializeComponent();
             InitializePlayer();
             InitializeEnemies();
-            GameLoop();
 
             KeyDown += MainWindow_KeyDown;
-        }
-
-        public void GameLoop()
-        {
-
         }
 
         public void InitializePlayer()
         {
 
             Rectangle? playerRectangle = gameGrid.FindName("Player") as Rectangle;
-            playerPositionMap = new Dictionary<Tuple<int, int>, bool>();
+            playerPositionMap = new Dictionary<Tuple<int, int>, Player>();
 
             if (playerRectangle != null)
             {
@@ -71,7 +65,7 @@ namespace SpaceInvaders
                     gameGrid.Children.Add(enemyRect);
 
                     enemyPositionMap.Add(Tuple.Create(row, col), enemies[row, col]);
-                    enemies[row, col] = new Enemy(enemyRect, gameGrid, enemyPositionMap);
+                    enemies[row, col] = new Enemy(enemyRect, gameGrid, enemyPositionMap, playerPositionMap);
 
                 }
             }
@@ -115,7 +109,7 @@ namespace SpaceInvaders
         private Enemy[,] enemies;
         private Laser? laserInstance;
         private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
-        private Dictionary<Tuple<int, int>, bool> playerPositionMap;
+        private Dictionary<Tuple<int, int>, Player> playerPositionMap;
 
 
 

@@ -14,7 +14,7 @@ namespace SpaceInvaders.Elements
 {
     class EnemyLaser
     {
-        public EnemyLaser(System.Windows.Shapes.Rectangle rectangle, int startingRow, Grid grid, Dictionary<Tuple<int, int>, bool> positionMap)
+        public EnemyLaser(System.Windows.Shapes.Rectangle rectangle, int startingRow, Grid grid, Dictionary<Tuple<int, int>, Player> positionMap)
         {
             enemyLaserRectangle = rectangle;
             row = startingRow;
@@ -39,14 +39,14 @@ namespace SpaceInvaders.Elements
         public void MoveDown()
         {
             row++;
-            if ((row + 1) < 9)
+            if ((row + 1) > 9)
             {
                 timer.Stop();
                 gameGrid.Children.Remove(enemyLaserRectangle);
             }
             else
             {
-                Grid.SetRow(enemyLaserRectangle, (Grid.GetRow(enemyLaserRectangle) - 1));
+                Grid.SetRow(enemyLaserRectangle, (Grid.GetRow(enemyLaserRectangle) + 1));
                 DetectCollision();
             }
         }
@@ -56,15 +56,18 @@ namespace SpaceInvaders.Elements
             int LaserColumn = Grid.GetColumn(enemyLaserRectangle);
             int laserRow = Grid.GetRow(enemyLaserRectangle);
             Tuple<int, int> laserPosition = Tuple.Create(laserRow, LaserColumn);
-
+            Console.WriteLine(laserPosition);
             if (playerPositionMap.ContainsKey(laserPosition))
             {
+                Player hitPlayer = playerPositionMap[laserPosition];
+                hitPlayer.TakeHit();
+                gameGrid.Children.Remove(enemyLaserRectangle);
             }
         }
 
         private DispatcherTimer timer;
         private Grid gameGrid;
-        private Dictionary<Tuple<int, int>, bool> playerPositionMap;
+        private Dictionary<Tuple<int, int>, Player> playerPositionMap;
 
 
 
