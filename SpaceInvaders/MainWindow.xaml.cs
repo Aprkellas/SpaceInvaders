@@ -65,7 +65,9 @@ namespace SpaceInvaders
                     gameGrid.Children.Add(enemyRect);
 
                     enemyPositionMap.Add(Tuple.Create(row, col), enemies[row, col]);
-                    enemies[row, col] = new Enemy(enemyRect, gameGrid, enemyPositionMap, playerPositionMap);
+                    if (playerPositionMap != null) { 
+                        enemies[row, col] = new Enemy(enemyRect, gameGrid, enemyPositionMap, playerPositionMap);
+                    }
 
                 }
             }
@@ -87,7 +89,9 @@ namespace SpaceInvaders
 
             gameGrid.Children.Add(laserRectangle);
 
-            laserInstance = new Laser(laserRectangle, numRows - 1, gameGrid, enemyPositionMap);
+            if (enemyPositionMap != null) { 
+                laserInstance = new Laser(laserRectangle, numRows - 1, gameGrid, enemyPositionMap);
+            }
         }
 
 
@@ -110,8 +114,8 @@ namespace SpaceInvaders
         private Player? playerInstance;
         private Enemy[,]? enemies;
         private Laser? laserInstance;
-        private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
-        private Dictionary<Tuple<int, int>, Player> playerPositionMap;
+        private Dictionary<Tuple<int, int>, Enemy>? enemyPositionMap;
+        private Dictionary<Tuple<int, int>, Player>? playerPositionMap;
 
 
 
