@@ -108,7 +108,7 @@ namespace SpaceInvaders
         }
 
         private Player? playerInstance;
-        private Enemy[,] enemies;
+        private Enemy[,]? enemies;
         private Laser? laserInstance;
         private Dictionary<Tuple<int, int>, Enemy> enemyPositionMap;
         private Dictionary<Tuple<int, int>, Player> playerPositionMap;

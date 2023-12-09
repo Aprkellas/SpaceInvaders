@@ -41,8 +41,10 @@ namespace SpaceInvaders.Elements
             row++;
             if (row > 9)
             {
-                timer.Stop();
-                gameGrid.Children.Remove(enemyLaserRectangle);
+                if (timer != null) { 
+                    timer.Stop();
+                    gameGrid.Children.Remove(enemyLaserRectangle);
+                }
             }
             else
             {
@@ -65,7 +67,7 @@ namespace SpaceInvaders.Elements
             }
         }
 
-        private DispatcherTimer timer;
+        private DispatcherTimer? timer;
         private Grid gameGrid;
         private Dictionary<Tuple<int, int>, Player> playerPositionMap;
 
