@@ -80,8 +80,10 @@ namespace SpaceInvaders
                 Fill = Brushes.Blue 
             };
 
-            Grid.SetColumn(laserRectangle, Grid.GetColumn(playerInstance.playerRectangle)); 
-            Grid.SetRow(laserRectangle, Grid.GetRow(playerInstance.playerRectangle) - 1 ); 
+            if (playerInstance != null) { 
+                Grid.SetColumn(laserRectangle, Grid.GetColumn(playerInstance.playerRectangle)); 
+                Grid.SetRow(laserRectangle, Grid.GetRow(playerInstance.playerRectangle) - 1 );
+            }
 
             gameGrid.Children.Add(laserRectangle);
 
