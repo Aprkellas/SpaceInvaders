@@ -31,7 +31,7 @@ namespace SpaceInvaders.Elements
             timer.Start();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object? sender, EventArgs e)
         {
             MoveDown();
         }
